@@ -66,11 +66,13 @@ CREATE TABLE comment (
 
 DROP TABLE IF EXISTS image_file;
 CREATE TABLE image_file (
-	uuid varchar(256)	NOT NULL,
-	save_dir varchar(1000)	NOT NULL,
-	image_name varchar(1000)	NOT NULL,
-	bno	bigint NOT NULL,
-	mno	bigint NOT NULL,
+	uuid varchar(256) NOT NULL,
+	save_dir varchar(1000) NOT NULL,
+	image_name varchar(1000) NOT NULL,
+	image_size bigint NOT NULL,
+	bno	bigint default NULL,
+	mno	bigint default NULL,
+	reg_at datetime default current_timestamp,
 	primary key(uuid)
 ) default CHARSET=utf8mb4;
 
