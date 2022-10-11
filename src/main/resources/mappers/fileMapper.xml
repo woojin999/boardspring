@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.myweb.www.repository.FileDAO">
+<insert id="insertBFile" parameterType="fvo">
+		insert into image_file
+		(uuid, save_dir, image_name, image_size, bno)
+		values (#{uuid}, #{saveDir}, #{imageName}, #{imageSize}, #{bno})
+	</insert>
+<insert id="insertMFile" parameterType="fvo">
+		insert into image_file
+		(uuid, save_dir, image_name, image_size, mno)
+		values (#{uuid}, #{saveDir}, #{imageName}, #{imageSize}, #{mno})
+	</insert>
+	<select id="selectListBFile" parameterType="long" resultType="fvo">
+		select * from image_file where bno = #{bno}
+	</select>
+	<select id="selectListMFile" parameterType="long" resultType="fvo">
+		select * from image_file where mno = #{mno}
+	</select>
+	<delete id="deleteFile" parameterType="string">
+		delete from image_file where uuid = #{uuid}
+	</delete>
+	<delete id="deleteAllBFile" parameterType="long">
+		delete from image_file where bno = #{bno}
+	</delete>
+	<delete id="deleteAllMFile" parameterType="long">
+		delete from image_file where mno = #{mno}
+	</delete>
+</mapper>
