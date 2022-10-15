@@ -1,1 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="com.myweb.www.repository.BoardDAO">
+ 	<insert id="insert" parameterType="bvo">
+ 	insert into board
+ 	(category, pname, shopname, purl, price, description, writer, file_count)
+ 	values
+ 	(#{category}, #{pname}, #{shopname}, #{purl}, #{price}, #{description}, #{writer}, #{file_count})
+ 	</insert>
+ 	<select id="selectList" resultType="bvo" parameterType="pgvo">
+ 		select a.bno, category, pname, price, read_count, writer, mod_at, file_count
+ 		from (
+ 			select bno from board where bno > 0 order by bno desc
+ 			limit #{pageStart}, #{qty}
+ 		) a left join board b
+ 		on a.bno = b.bno
+ 	</select>
+ 	<select id="selectOne" resultType="bvo">
+ 		select * from board where
+ 		bno = #{bno}
+ 	</select>
+ 	<select id="selectTotalCount" resultType="int" parameterType="pgvo">
+ 		select count(bno) from board
+ 	</select>
+ 	<select id="selectLastBno" resultType="long">
+ 		select max(bno) from board
+ 	</select>
+ 	<update id="update" parameterType="bvo">
+ 	update board set
+ 	category=#{category},
+ 	pname=#{pname},
+ 	shopname=#{shopname},
+ 	purl=#{purl},
+ 	price=#{price},
+ 	description=#{description}
+ 	mod_at=now()
+ 	where bno = #{bno}
+ 	</update>
+ 	<update id="updateReadCount">
+ 		update board set read_count = read_count + #{i}
+ 		where bno = #{bno}
+ 	</update>
+ 	<delete id="delete">
+ 		delete from board where bno = #{bno}
+ 	</delete>
+ </mapper>
