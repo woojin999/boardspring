@@ -1,2 +1,2 @@
-# reviewmoa-project
-[Spring] reviewmoa-project
+# board practice
+[Spring] board practice
